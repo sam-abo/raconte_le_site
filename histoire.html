@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebPage</title>
+    <link rel="stylesheet" href="general_styles.css">
+    <link rel="stylesheet" href="histoire_styles.css">
+</head>
+<body>
+    <!-- on créé d'abord la CLASSE navbar,
+     Tout ce qui es tdedans appartient donc à la classe navbar
+     on cré ensuite un conteneur  qui contiendra les trucs qu'on verra dans la navbar -->
+    
+    <!-- Navbar section -->
+    <nav class="navbar">
+        <div class="navbar__container">
+            <div class="navbar__toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <!-- <i class="bar"></i> -->
+
+            </div>
+
+            <ul class="navbar__menu">
+                <li class="navbar__item">
+                    <a href="/", class="navbar__links"><span> Accueil </span></a>
+                </li>
+
+                <li class="navbar__item">
+                    <a href="about.html", class="navbar__links">A propos</a>
+                </li>
+
+                <li class="navbar__item">
+                    <a href="/", class="navbar__links">Les Aventures d'Ellena McGuffin (ou les autres histoires)</a>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
+
+    <!-- header -->
+    <div class="band">
+        <div class="band__container">
+            <div class="band__overlay">
+                <h1>Les aventures d'Ellena McGuffin</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reste du site -->
+    <div class="story">
+        <div class="story__container">
+            <div class="story__content">
+                
+                <div class="img_container">
+                    <a href="about.html">
+                        <img src="images/Ellena.webp"
+                        alt="cover"
+                        id="cover_mcguffin"
+                        loading="lazy"
+                        >
+                    </a>
+                </div>
+                
+                <p> Disons qu'il existe des tas de mondes. Histoires, Multivers, Bulles...
+                    Appelez ça comme vous voulez. Le Bureau de l'Outre-Monde, une organisation opaque et mystérieuse,
+                    appelle ça des "Diégèses".
+                    L'agent Ellena McGuffin travailles à s'assurer que tout s'y passes conformément aux règles.
+                    Mais Ellena reçoit un jour une promotion pour travailler sur de nouvelles affaires étranges, celles des Dossiers obscurs.
+                    L'Outre-Monde classe ainsi les affaires qui leur semblent appartenir de près ou de loin a ce qu'on appelle "l'Obscure Question".
+                    Une question capitale que Personne ne peut pourtant poser... </p>
+
+            </div>
+            <br>
+            <div class="chap_selec">
+                <h1>La liste des épisodes</h1>
+            </div>
+            <div class="link-list" id="link-list">
+                <!-- <ul>
+                    <li><a href="chapitre1.html">Chapitre 1</a></li>
+                    <li><a href="chapitre2.html">Chapitre 2</a></li>
+                    <li><a href="chapitre3.html">Chapitre 3</a></li>
+                    <li><a href="chapitre4.html">Chapitre 4</a></li>
+                    <li><a href="chapitre4.html">Chapitre 5</a></li>
+                    <li><a href="chapitre4.html">Chapitre N</a></li>
+                    <li><a href="chapitre4.html">Chapitre N</a></li>
+                    <li><a href="chapitre4.html">Chapitre N</a></li>
+                    <li><a href="chapitre4.html">Chapitre N</a></li>
+                    <li><a href="chapitre4.html">Chapitre N</a></li>
+                    <li><a href="chapitre4.html">Chapitre N</a></li>
+                    <li><a href="chapitre4.html">Chapitre N</a></li>
+
+                </ul> -->
+                <ul id="chapter-list">
+                    <!-- 
+                    <li><a href="chapitre1.html">Chapitre 1</a></li>
+                     Les objets crées sont de cette forme
+                    -->
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- <script src="app.js"></script> -->
+    <script type="module" src="JS_modules/navbar.js"></script>
+    <!-- <script type="module" src="JS_modules/ep_list.js"></script> -->
+    <script type="module" src="JS_modules/ep_list.min.js"></script>
+
+
+    <style>
+        /* on ne met que les styles qui ont un caractère critique, par exemple le styling de texte si on veut qu'il soit charger en priorité,
+        ça alourdi la page mais ça assure que qqchose soit chargé */
+        :root{
+            --max-width : 1400px;
+        }
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            font-family: 'kumbh Sans', sans-serif ;
+        }
+        html, body {
+            margin: 0;
+            height: 100%;
+            background-color: black;
+
+        }
+    </style>
+
+
+</body>
+</html>
+
+<!-- 192.168.1.22  -->

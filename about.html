@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebPage</title>
+    <link rel="stylesheet" href="general_styles.css">
+
+    <link rel="stylesheet" href="about_styles.css">
+</head>
+<body>
+    <!-- on créé d'abord la CLASSE navbar,
+     Tout ce qui es tdedans appartient donc à la classe navbar
+     on cré ensuite un conteneur  qui contiendra les trucs qu'on verra dans la navbar -->
+    
+    <!-- Navbar section -->
+    <nav class="navbar">
+        <div class="navbar__container">
+            <div class="navbar__toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <!-- <i class="bar"></i> -->
+
+            </div>
+
+            <ul class="navbar__menu">
+                <li class="navbar__item">
+                    <a href="/", class="navbar__links"><span> Accueil </span></a>
+                </li>
+
+                <li class="navbar__item">
+                    <a href="/", class="navbar__links">A propos</a>
+                </li>
+
+                <li class="navbar__item">
+                    <a href="histoire.html", class="navbar__links">Les Aventures d'Ellena McGuffin (ou les autres histoires)</a>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
+
+    <!-- header -->
+    <div class="band">
+        <div class="band__container">
+            <div class="band__overlay">
+                <h1>Les aventures d'Ellena McGuffin</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reste du site -->
+    <div class="main">
+        <div class="main__container">
+            <div class="main__content">
+                <h1>ABOUT PAGE</h1>
+            </div>
+        </div>
+    </div>
+    <!-- <script src="app.js"></script> -->
+    <script type="module" src="JS_modules/navbar.js"></script>
+
+    <style>
+        :root{
+            --max-width : 1400px;
+        }
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            font-family: 'kumbh Sans', sans-serif ;
+        }
+        html, body {
+            margin: 0;
+            height: 100%;
+            background-color: black;
+
+        }
+    </style>
+
+</body>
+</html>

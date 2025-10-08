@@ -1,0 +1,20 @@
+Pour le readings.js :
+	
+	- lazy preload les images avant et après (code que pour après là) en se servant
+	de l'idée de cache, à faire marcher.
+	
+Pour le ep_list.js : 
+	-voir si y'a un truc à faire dans l'appel de json, le Lazy instantiation 
+	a l'aire de pas être très utile pour l'instant car on a pas assez d'éléments.
+	Essayer de comprendre ce que sont les service workers
+	
+Pour le rendu final :
+
+	-Finaliser des effets de style basiques.
+	
+	-Setup un premier truc sur github pour voir ? si ça marche bien on laisse comme ça pour
+	l'instant, sinon on verra les autres solutions
+	
+	
+commande pour réduire la taille des fichiers json :
+terser reading.js -o reading.min.js -c -m
