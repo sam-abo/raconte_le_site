@@ -1,0 +1,48 @@
+.main {
+    background-color: black;
+    height: 100%;
+}
+
+.main__container {
+    /* display: grid;
+    grid-template-columns: 1fr;
+    align-items: top;
+    justify-self: top; */
+    display: flex;
+    justify-content: center;
+    align-items: start;
+
+    margin: 0 auto;
+    height: 90vh;
+    background-color: black;
+    z-index: 1;
+    width: 100%;
+    max-width: var(--max-width);
+
+    height: 100%;
+    /* position: absolute; */
+
+}
+
+.main__content h1 {
+    color:aquamarine;
+    text-align: center;
+    /* display: inline-block; */
+
+    font-size: 7vh;
+}
+
+.main__content p {
+    /* display : inline-block; */
+    color: #fff;
+    align-items: left;
+    text-align: start;
+    font-size: 2vh;
+    width: 80%;
+
+
+}
+
+@media screen and (max-width:960px) {
+    
+}
