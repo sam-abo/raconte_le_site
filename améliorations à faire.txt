@@ -3,6 +3,9 @@ Pour le readings.js :
 	- lazy preload les images avant et après (code que pour après là) en se servant
 	de l'idée de cache, à faire marcher.
 	
+	- Ajuster le click, faire en sorte que le click à gauche face previous page.
+	-> solution possible, superposer un div à l'image. Beaucoup plus simple. Avec des positions relative et absolute
+	
 Pour le ep_list.js : 
 	-voir si y'a un truc à faire dans l'appel de json, le Lazy instantiation 
 	a l'aire de pas être très utile pour l'instant car on a pas assez d'éléments.
