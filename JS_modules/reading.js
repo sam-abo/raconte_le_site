@@ -14,9 +14,6 @@ let img = null;              // l'image affichée
 let copy_data = [];         // la copie des données json pour ne pas faire n'importe quoi avec
 let newUrl = null;          //le nouvel url qu'on redéfinit à chaque fois
 
-
-
-
 let imageCache = {};
 
 //initialization of the page
@@ -27,6 +24,9 @@ function initialization() {
             data = json,
             iterable = Object.keys(data);
             copy_data = data[episode][1];
+
+            console.log(params);
+            console.log(page);
 
             // objets qu'on va éviter de recréer à chaque fois pour ne pas y accoller les listen events tout le temps
             // TITRE des épisodes
@@ -57,16 +57,18 @@ function initialization() {
 
             page_select_obj = document.createElement("select");
             page_select_obj.id = "easy_page_select";
-
-            // For each page, create an option value (dépend de episode, qui change, donc doit rester là):
-            // let page_iterable = Object.keys(data[episode][1]);
-            // for (let i = 0 ; i < page_iterable.length ; i ++){
-            //     const option_page = document.createElement("option");
-            //     option_page.text = `page  ${parseInt(i) +1}`;
-            //     // console.log(option_page.text);
-            //     page_select_obj.appendChild(option_page);
-            //     option_page.value = i+1;
-            // };
+            
+            // For each page, create an option value (dépend de episode, qui change, donc on le recréé à chaque changement d'ep, donc doit rester là):
+            let page_iterable = Object.keys(data[episode][1]);
+            for (let i = 0 ; i < page_iterable.length ; i ++){
+                const option_page = document.createElement("option");
+                option_page.text = `page  ${parseInt(i) +1}`;
+                // console.log(option_page.text);
+                page_select_obj.appendChild(option_page);
+                option_page.value = i+1;
+            };
+            
+            check_activation("Viewer");
 
             //BOUTON du select des PAGES
             const button_page_select = document.createElement("button");
@@ -93,12 +95,8 @@ function initialization() {
 
             img.src =  copy_data[page_pos];
 
-
-            //image_cache
-
             // preload(page,page_pos).then(() => console.log("Preload done"));
             preload(page,page_pos)
-
 
 
             //############################################ Ajout des EVENT LISTENERS
@@ -131,7 +129,6 @@ function initialization() {
             div_select_pages.appendChild(next_page);
             div_select_pages.appendChild(button_page_select);
             // Viewer_opt(data,copy_data, page,episode,img);
-            Viewer_opt(data, episode);
 
         });
 }
@@ -191,8 +188,6 @@ async function preload(page, page_pos) {
     const newCache = {};
 
     if (page < copy_data.length) { //if we can preload the next image
-        // const nextSrc = copy_data[page_pos + 1]; //fetch the src
-        // newCache[2] = preloadImage(nextSrc); //launch the real preloading (so decode)
         newCache[2] = preloadImage(copy_data[page_pos + 1]); //launch the real preloading (so decode) of the src
 
         console.log("🕓 Preloading next page...");
@@ -219,13 +214,9 @@ function Select_Goto(value, target, ep_title, updateHistory = true) {
         episode = value;
         copy_data = data[episode][1];
         // console.log(`Copy_data after : ${copy_data}`);
-        
-
 
         img.src = data[value][1][page_pos]; // change seulement l'image
         ep_title.textContent = value;
-
-        
 
         // mettre à jour l'URL sans reload
         newUrl = `lecture.html?path=${value}&page=${page}`;
@@ -233,10 +224,7 @@ function Select_Goto(value, target, ep_title, updateHistory = true) {
         window.Location = newUrl;
         //preload
         // preload(page,page_pos).then(() => console.log("Preload done"));
-        preload(page,page_pos)
-
-        
-        
+        preload(page,page_pos);
     };
 
     if (target == "page"){
@@ -254,95 +242,10 @@ function Select_Goto(value, target, ep_title, updateHistory = true) {
 
         //preload une fois qu'on est atteri sur la page visée
         // preload(page,page_pos).then(() => console.log("Preload done"));
-        preload(page,page_pos)
+        preload(page,page_pos);
 
     };
 };
-
-// function Goto_adjacent_page(target) {
-
-//     if (target == "+") {
-//         //d'abord, on verrifie si y'a une image qui existe en cache à la position "après",
-//         // Si c'est le cas on a forcément validé la condition page < copy_data.length  :
-
-//         if (page < copy_data.length) { //si on est pas arrivé à la fin
-//             // --- 🔹 Vérifie si l'image suivante est déjà en cache
-//             if (imageCache[2]) {
-//                 console.log(`✅ Cache hit: using preloaded image for page ${page}`);
-//                 //idem, pour l'opti on évite de trop utiliser src puisqu'on manipule des images grandes
-//                 // img.src = imageCache[2].src; //l'image courante devient l'image du slot "après"
-
-//                 requestAnimationFrame(() => {
-//                     img.src = imageCache[2].src;
-//                 });
-//                 // imageCache[2] = null; 
-
-//             } else {
-//                 console.log(`❌ Cache miss: loading image from source for page ${page}`); //à prori, ça devrait ne jamais arriver mais on sait jamais
-//                 img.src = copy_data[page_pos];
-//             }
-
-//             params = new URLSearchParams(window.location.search);
-//             episode = params.get("path"); 
-//             page++;               // incrémente page
-//             page_pos = page - 1;  // recalcul index
-//             newUrl = `lecture.html?path=${episode}&page=${page}`;
-
-//             preload(page,page_pos);
-
-            
-
-//             // mettre à jour l'URL sans reload
-//             history.pushState({page}, "", newUrl);
-
-//             // preload
-
-//             return
-//         }
-//     }
-
-//     if (target == "-") {
-        
-//         if (page > 1) {
-//             // --- 🔹 Vérifie si l'image suivante est déjà en cache
-//             if (imageCache[0]) {
-//                 console.log(`✅ Cache hit: using preloaded image for page ${page}`);
-//                 requestAnimationFrame(() => {
-//                     img.src = imageCache[0].src;
-//                 });
-//                 //on vide le cache
-
-//             } else {
-//                 console.log(`❌ Cache miss: loading image from source for page ${page}`);
-//                 img.src = copy_data[page_pos];
-//             }
-
-//             params = new URLSearchParams(window.location.search);
-//             episode = params.get("path"); 
-//             copy_data = data[episode][1];
-            
-//             page--;               // décrémente page
-//             page_pos = page - 1;  // recalcul index
-//             preload(page,page_pos);
-
-            
-
-//             // img.src = copy_data[page_pos]; // change seulement l'image
-
-//             // mettre à jour l'URL sans reload
-//             newUrl = `lecture.html?path=${episode}&page=${page}`;
-//             history.pushState({page}, "", newUrl);
-
-//             //preload
-//             // preload(page,page_pos).then(() => console.log("Preload done"));
-//             // preload(page,page_pos);
-
-
-//             return
-//         }
-//     }
-// }
-
 
 async function Goto_adjacent_page(target) {
     //Go to becomes async to handle the promises of imageCache.
@@ -404,27 +307,6 @@ async function Goto_adjacent_page(target) {
     };
     // Launch the next preload (async, but we can't launch it earlier because else we abord the current wait)
     preload(page, page_pos);
-}
-
-
-
-function Viewer_opt() {
-
-    console.log(params);
-    console.log(page);
-
-    
-    // For each page, create an option value (dépend de episode, qui change, donc on le recréé à chaque changement d'ep, donc doit rester là):
-    let page_iterable = Object.keys(data[episode][1]);
-    for (let i = 0 ; i < page_iterable.length ; i ++){
-        const option_page = document.createElement("option");
-        option_page.text = `page  ${parseInt(i) +1}`;
-        // console.log(option_page.text);
-        page_select_obj.appendChild(option_page);
-        option_page.value = i+1;
-    };
-    
-    check_activation("Viewer");
 }
 
 initialization();
