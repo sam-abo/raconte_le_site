@@ -28,6 +28,9 @@
     height: 100%;
     position: relative;
 
+    padding-bottom: 3rem; /*pour éviter que le bas du site s'arrête vraiment à la fin du dernier div, en tout cas pour l'instant*/
+
+
 
 }
 
