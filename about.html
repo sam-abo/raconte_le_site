@@ -58,13 +58,51 @@
                     Je suis juste quelqu'un qui fait de la BD tout seul dans son coin, tout (tout, même le site) est fait
                     par moi, donc si vous appréciez ça me fait très plaisir.
                     <br>
-                    Si vous voulez me soutenir, vous pouvez déjà me suivre sur <a href="https://www.instagram.com/r.a.c.o.n.t.e/">instagram</a>.
+                    Si vous voulez me soutenir, vous pouvez déjà me suivre sur <a id = "insta-link", href="https://www.instagram.com/r.a.c.o.n.t.e/">instagram</a>.
                 </p>
             </div>
         </div>
     </div>
     <!-- <script src="app.js"></script> -->
     <script type="module" src="JS_modules/navbar.js"></script>
+    <script>
+        //script pour la gestion du lien insta uniquement
+        document.addEventListener("DOMContentLoaded", () => {
+            const insta_link = document.getElementById("insta-link"); //l'id de ce qui sera visé par le script
+
+            const application_link = "https://www.instagrem.com/r.a.c.o.n.t.e?igsh=NnVncnh4Ymw2cmZz";
+            const website_link = "https://www.instagram.com/r.a.c.o.n.t.e/";
+
+            //si on est en mobile, on ajoute le href sur insta_link à partir de app ou web
+
+            // is_mobile = window.matchMedia("(max-width: 960pxpx)").matches;
+            is_mobile = window.matchMedia("(max-width:960px)").matches;
+
+            console.log(`is mobile ? : ${is_mobile}`);
+            if (is_mobile){ //on est sur tel, on privilégie le lien 
+                insta_link.href = application_link;
+
+                //il faut donc checker si l'app est installée :
+
+                // Fallback vers la version web si l’app n’est pas installée
+                instaLink.addEventListener("click", (e) => {
+                // On tente d’ouvrir l’app pendant un court délai
+                const now = Date.now(); //timer now
+                setTimeout(() => {
+                    if (Date.now() - now < 1500) { //temps présent -repère est
+                    // Si après 1,5s on n’a pas quitté la page, l’app n’est pas installée
+                    window.location.href = webLink;
+                    }
+                }, 1200);
+                });
+
+            }
+            else {
+                insta_link.href = website_link;
+            }
+
+        })
+    </script>
 
     <!-- <style>
         :root{
