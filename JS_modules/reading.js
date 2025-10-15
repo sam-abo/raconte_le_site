@@ -90,7 +90,10 @@ function initialization() {
             img.setAttribute("type", "current");
 
             const div_left_click = document.getElementById("page");
+            div_left_click.id = "left_click";
             const div_right_click = document.getElementById("page");
+            div_left_click.id = "right_click";
+
 
 
             img.decoding = "sync";
