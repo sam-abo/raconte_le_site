@@ -89,6 +89,10 @@ function initialization() {
             img.setAttribute("id", "current_page");
             img.setAttribute("type", "current");
 
+            const div_left_click = document.getElementById("page");
+            const div_right_click = document.getElementById("page");
+
+
             img.decoding = "sync";
             img.loading = "lazy";
             // img.loading = "lazy";
@@ -121,6 +125,8 @@ function initialization() {
             // ################################################# APPEND CHILDS
             div_ep_title.appendChild(ep_title);
             div_img.appendChild(img);
+            div_img.appendChild(div_left_click);
+            div_img.appendChild(div_right_click);
             div_select_episodes.appendChild(ep_select_obj);
             div_select_episodes.appendChild(button_ep_select);
 
