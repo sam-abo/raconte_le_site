@@ -89,10 +89,10 @@ function initialization() {
             img.setAttribute("id", "current_page");
             img.setAttribute("type", "current");
 
-            const div_left_click = document.getElementById("page");
-            div_left_click.id = "left_click";
-            const div_right_click = document.getElementById("page");
-            div_left_click.id = "right_click";
+            // const div_left_click = document.getElementById("page");
+            // div_left_click.id = "left_click";
+            // const div_right_click = document.getElementById("page");
+            // div_left_click.id = "right_click";
 
 
 
@@ -122,14 +122,26 @@ function initialization() {
             });
 
             // click sur l'image pour aller à la suivante (modifier pour pouvoir aller à la précédente aussi)
-            img.addEventListener("click", () => {Goto_adjacent_page("+");});
+            img.addEventListener("click", (e) => {
+                if (e.offsetX <  img.width/2){
+                    Goto_adjacent_page("-");
+                }
+                else {
+                    Goto_adjacent_page("+");
+                }
+
+                
+            
+                // Goto_adjacent_page("+");
+            
+            });
 
 
             // ################################################# APPEND CHILDS
             div_ep_title.appendChild(ep_title);
             div_img.appendChild(img);
-            div_img.appendChild(div_left_click);
-            div_img.appendChild(div_right_click);
+            // div_img.appendChild(div_left_click);
+            // div_img.appendChild(div_right_click);
             div_select_episodes.appendChild(ep_select_obj);
             div_select_episodes.appendChild(button_ep_select);
 
@@ -142,29 +154,43 @@ function initialization() {
         });
 }
 
-function MYpreload(page, page_pos) {
-    requestIdleCallback(async () => {
-        imageCache = {};
+// function MYpreload(page, page_pos) {
+//     requestIdleCallback(async () => {
+//         imageCache = {};
 
-        if (page > 1) {
-            const preloadPrev = new Image();
-            preloadPrev.src = copy_data[page_pos - 1];
-            await preloadPrev.decode().catch(() => {});
-            imageCache[0] = preloadPrev;
-        }
+//         if (page > 1) {
+//             const preloadPrev = new Image();
+//             preloadPrev.src = copy_data[page_pos - 1];
+//             await preloadPrev.decode().catch(() => {});
+//             imageCache[0] = preloadPrev;
+//         }
 
-        if (page < copy_data.length) {
-            const preloadNext = new Image();
-            preloadNext.src = copy_data[page_pos + 1];
-            await preloadNext.decode().catch(() => {});
-            imageCache[2] = preloadNext;
-        }
+//         if (page < copy_data.length) {
+//             const preloadNext = new Image();
+//             preloadNext.src = copy_data[page_pos + 1];
+//             await preloadNext.decode().catch(() => {});
+//             imageCache[2] = preloadNext;
+//         }
 
-        console.log(`Cache updated for page=${page}`);
-    });
-};
+//         console.log(`Cache updated for page=${page}`);
+//     });
+// };
 
 // Utilitaire : retourne une promesse qui se résout quand l'image est chargée + décodée
+
+function FindPosition(oElement) {
+    if(typeof(oElement.offsetParent) != "undefined") {
+        for(var posX = 0 ; posY = 0 ; oElement = oElement.offsetParent){
+            posX += oElement.offsetLeft;
+            posY += oElement.offsetTop;
+        }
+        return [posX, posY];
+    }
+    else{
+        return [oElement.x, oElement.y];
+    }
+}
+
 function preloadImage(src) { // function that immediatly returns a promise for the image;
     //the promise is define such that, resolve : what we do if it resolves, and reject, what we do if it doesnt.
     return new Promise((resolve, reject) => {
