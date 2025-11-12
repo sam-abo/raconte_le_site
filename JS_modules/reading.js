@@ -18,7 +18,7 @@ let imageCache = {};
 
 //initialization of the page
 function initialization() {
-    fetch("public-webp/episodes_list.json")
+    fetch("/raconte_le_site/public-webp/episodes_list.json")
         .then(res => res.json())
         .then(json => {
             data = json,

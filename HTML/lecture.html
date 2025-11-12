@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raconte Le Site</title>
+    <link rel="stylesheet" href="/raconte_le_site/CSS/general_styles.css">   
+    <link rel="stylesheet" href="/raconte_le_site/CSS/lecture_page_styles.css">
+</head>
+<body>
+    <!-- on créé d'abord la CLASSE navbar,
+     Tout ce qui es tdedans appartient donc à la classe navbar
+     on cré ensuite un conteneur  qui contiendra les trucs qu'on verra dans la navbar -->
+    
+    <!-- Navbar section -->
+    <nav class="navbar">
+        <div class="navbar__container">
+            <div class="navbar__toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <!-- <i class="bar"></i> -->
+
+            </div>
+
+            <ul class="navbar__menu">
+                <li class="navbar__item">
+                    <a href="/", class="navbar__links"><span> Accueil </span></a>
+                </li>
+
+                <li class="navbar__item">
+                    <a href="/", class="navbar__links">A propos</a>
+                </li>
+
+                <li class="navbar__item">
+                    <a href="histoire.html", class="navbar__links">Les Aventures d'Ellena McGuffin (ou les autres histoires)</a>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
+
+    <!-- header -->
+    <div class="band">
+        <div class="band__container">
+            <div class="band__overlay">
+                <h1>Les aventures d'Ellena McGuffin</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="page__container">
+
+        <div class="page__infos">
+            <div class="ep_title" id="title">
+                <!-- <h1>[Titre de l'ep]</h1> -->
+            </div>
+            <div class="ep_selector" id="ep_selector">
+                <!-- <h1>[sélecteur d'ep]</h1> -->
+                
+                <!-- Idée de select pour avoir un selecteur d'ep -->
+                <!-- <select name="cars" id="cars">
+                    <optgroup label="Swedish Cars">
+                        <option value="volvo">Volvo</option>
+                        <option value="saab">Saab</option>
+                    </optgroup>
+                    <optgroup label="German Cars">
+                        <option value="mercedes">Mercedes</option>
+                        <option value="audi">Audi</option>
+                    </optgroup>
+                </select> -->
+            </div>
+        </div>
+        
+        <div class="page_viewer" id="page">
+            <!-- <img src="images/template image.png" alt="exemple" id="current_page"> -->
+        </div>
+
+        <div class="page_manip" id="page_manip">
+            <!-- <h1>[sélecteur de pages]</h1> -->
+            <!-- même principe que pour le selecteur d'ep, un select -->
+            
+        </div>
+        
+    </div>
+    
+    <!-- <script src="app.js"></script> -->
+    <script type="module" src="/raconte_le_site/JS_modules/navbar.js"></script>
+    <script type="module" src="/raconte_le_site/JS_modules/reading.js"></script>
+    <!-- <script type="module" src="JS_modules/reading.min.js"></script> -->
+
+
+    <style>
+        /* on ne met que les styles qui ont un caractère critique, par exemple le styling de texte si on veut qu'il soit charger en priorité,
+        ça alourdi la page mais ça assure que qqchose soit chargé */
+        :root{
+            --max-width : 1400px;
+        }
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            font-family: 'kumbh Sans', sans-serif ;
+        }
+        html, body {
+            margin: 0;
+            height: 100%;
+            background-color: black;
+
+        }
+    </style>
+
+
+</body>
+</html>

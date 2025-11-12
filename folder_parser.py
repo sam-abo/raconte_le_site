@@ -23,6 +23,7 @@ def parser(public_file, extension) :
         name = ep
         relative_path = os.path.join(path,ep)
         pages_list = WalkOnFiles(relative_path, extension)
+        pages_list = ["/raconte_le_site/" + x for x in pages_list]
         if extension == "png" :
             pages_list = sorted(pages_list, reverse=True, key=lambda x: int(x[:-4].split('_')[-1]) )
         if extension == "webp" :
@@ -33,7 +34,7 @@ def parser(public_file, extension) :
         #             "path" : relative_path,
         #             "page_list" : pages_list})
 
-        data_bis.update({name : [relative_path,pages_list]})
+        data_bis.update({name : ["/raconte_le_site/" + relative_path,pages_list]})
 
 
     # json_res = json.dumps(data, indent=4)
