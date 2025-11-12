@@ -154,28 +154,6 @@ function initialization() {
         });
 }
 
-// function MYpreload(page, page_pos) {
-//     requestIdleCallback(async () => {
-//         imageCache = {};
-
-//         if (page > 1) {
-//             const preloadPrev = new Image();
-//             preloadPrev.src = copy_data[page_pos - 1];
-//             await preloadPrev.decode().catch(() => {});
-//             imageCache[0] = preloadPrev;
-//         }
-
-//         if (page < copy_data.length) {
-//             const preloadNext = new Image();
-//             preloadNext.src = copy_data[page_pos + 1];
-//             await preloadNext.decode().catch(() => {});
-//             imageCache[2] = preloadNext;
-//         }
-
-//         console.log(`Cache updated for page=${page}`);
-//     });
-// };
-
 // Utilitaire : retourne une promesse qui se résout quand l'image est chargée + décodée
 
 function FindPosition(oElement) {
