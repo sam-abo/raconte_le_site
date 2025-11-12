@@ -156,19 +156,6 @@ function initialization() {
 
 // Utilitaire : retourne une promesse qui se résout quand l'image est chargée + décodée
 
-function FindPosition(oElement) {
-    if(typeof(oElement.offsetParent) != "undefined") {
-        for(var posX = 0 ; posY = 0 ; oElement = oElement.offsetParent){
-            posX += oElement.offsetLeft;
-            posY += oElement.offsetTop;
-        }
-        return [posX, posY];
-    }
-    else{
-        return [oElement.x, oElement.y];
-    }
-}
-
 function preloadImage(src) { // function that immediatly returns a promise for the image;
     //the promise is define such that, resolve : what we do if it resolves, and reject, what we do if it doesnt.
     return new Promise((resolve, reject) => {
@@ -218,7 +205,7 @@ async function preload(page, page_pos) {
 
 
 
-function Select_Goto(value, target, ep_title, updateHistory = true) {
+function Select_Goto(value, target, ep_title) {
     if (target == "episode"){
         page=1;               // on fixe la page au début
         page_pos = page - 1;  // recalcul index
@@ -290,6 +277,10 @@ async function Goto_adjacent_page(target) {
             img.src = copy_data[page_pos];
         }
     };
+
+    // if ((target == "+") && (page == copy_data.length)) { //if we are at the last page, go to the next episode
+    //     f
+    // }
 
     if ((target == "-") && (page > 1)) {
         page--;
