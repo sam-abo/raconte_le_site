@@ -48,9 +48,15 @@ def converter_worker(ctx : Tuple[str,str] ):
 
 def converter_pool() :
     path = 'public-png' #os.path.join(os.getcwd(), 'public')
+    webp_path = 'public-webp'
     # print(path)   
     folders = next(os.walk(path))[1]
     folders = sorted(folders, key=lambda x: int(x.split(' ')[1]))
+
+    webp_folders = next(os.walk(webp_path))[1]
+
+    folders = [x for x in folders if x not in webp_folders]
+
     print(folders)
 
     
@@ -58,34 +64,7 @@ def converter_pool() :
     jobs = [(path,folder) for folder in folders] #Array(iterable) of the args we are going to pass to the Pool for multiprocessing
     with Pool(TOTAL_CPUS) as pool:
         pool.map(converter_worker, jobs)
-        # completed_queue.put(None)
-
-
-    
-
-# def converter() :
-#     path = 'public' #os.path.join(os.getcwd(), 'public')
-#     # print(path)
-#     folders = next(os.walk(path))[1]
-#     folders = sorted(folders, key=lambda x: int(x.split(' ')[1]))
-#     print(folders)
-
-
-#     for ep in folders :
-#         # print(ep)
-#         relative_path = os.path.join(path,ep)
-#         print(relative_path)
-#         new_path = os.path.basename(relative_path)
-#         print(os.path.join("public-webp", new_path))
         
-#         # pages_list = WalkOnFiles(relative_path, "png")
-#         # pages_list = sorted(pages_list, reverse=True, key=lambda x: int(x[:-4].split('_')[-1]) )
-        
-#         # for page in pages_list :
-#         #     image = Image.open(page)
-#         #     image = image.convert('RGB')
-#         #     image.save(f'{page}.webp', 'webp')
-#         # return
 
 
 converter_pool()
