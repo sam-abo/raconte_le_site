@@ -13,7 +13,7 @@ function Listing() {
 
       const li = document.createElement("li");
       const a = document.createElement("a");
-      let link = `lecture.html?path=${episode}&page=1`;
+      let link = `/raconte_le_site/HTML/lecture.html?path=${episode}&page=1`;
       a.href = link;
       a.textContent = episode;
       li.appendChild(a);

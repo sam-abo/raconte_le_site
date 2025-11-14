@@ -68,7 +68,6 @@ function initialization() {
                 option_page.value = i+1;
             };
             
-            check_activation("Viewer");
 
             //BOUTON du select des PAGES
             const button_page_select = document.createElement("button");
@@ -89,20 +88,12 @@ function initialization() {
             img.setAttribute("id", "current_page");
             img.setAttribute("type", "current");
 
-            // const div_left_click = document.getElementById("page");
-            // div_left_click.id = "left_click";
-            // const div_right_click = document.getElementById("page");
-            // div_left_click.id = "right_click";
-
-
-
             img.decoding = "sync";
             img.loading = "lazy";
             // img.loading = "lazy";
 
             img.src =  copy_data[page_pos];
 
-            // preload(page,page_pos).then(() => console.log("Preload done"));
             preload(page,page_pos)
 
 
@@ -112,27 +103,23 @@ function initialization() {
             // BUTTON SELECT PAGE
             button_page_select.addEventListener("click", () => {Select_Goto(page_select_obj.value, "page", ep_title);});
             // BUTTON page PREV
-            prev_page.addEventListener("click", () => {Goto_adjacent_page("-");});
+            prev_page.addEventListener("click", () => {Goto_adjacent_page("-", ep_title);});
             // BUTTON page NEXT
-            next_page.addEventListener("click", () => {Goto_adjacent_page("+")});
+            next_page.addEventListener("click", () => {Goto_adjacent_page("+", ep_title)});
             // KEY ARROWS :
             document.addEventListener("keydown", e => {
-                if (e.key === "ArrowRight") {Goto_adjacent_page("+");} /*Page suivante*/
-                if (e.key === "ArrowLeft") {Goto_adjacent_page("-");} /*Page précédente*/
+                if (e.key === "ArrowRight") {Goto_adjacent_page("+", ep_title);} /*Page suivante*/
+                if (e.key === "ArrowLeft") {Goto_adjacent_page("-", ep_title);} /*Page précédente*/
             });
 
             // click sur l'image pour aller à la suivante (modifier pour pouvoir aller à la précédente aussi)
             img.addEventListener("click", (e) => {
                 if (e.offsetX <  img.width/2){
-                    Goto_adjacent_page("-");
+                    Goto_adjacent_page("-",ep_title);
                 }
                 else {
-                    Goto_adjacent_page("+");
+                    Goto_adjacent_page("+",ep_title);
                 }
-
-                
-            
-                // Goto_adjacent_page("+");
             
             });
 
@@ -155,19 +142,6 @@ function initialization() {
 }
 
 // Utilitaire : retourne une promesse qui se résout quand l'image est chargée + décodée
-
-function FindPosition(oElement) {
-    if(typeof(oElement.offsetParent) != "undefined") {
-        for(var posX = 0 ; posY = 0 ; oElement = oElement.offsetParent){
-            posX += oElement.offsetLeft;
-            posY += oElement.offsetTop;
-        }
-        return [posX, posY];
-    }
-    else{
-        return [oElement.x, oElement.y];
-    }
-}
 
 function preloadImage(src) { // function that immediatly returns a promise for the image;
     //the promise is define such that, resolve : what we do if it resolves, and reject, what we do if it doesnt.
@@ -218,7 +192,7 @@ async function preload(page, page_pos) {
 
 
 
-function Select_Goto(value, target, ep_title, updateHistory = true) {
+function Select_Goto(value, target, ep_title) {
     if (target == "episode"){
         page=1;               // on fixe la page au début
         page_pos = page - 1;  // recalcul index
@@ -238,6 +212,16 @@ function Select_Goto(value, target, ep_title, updateHistory = true) {
         //preload
         // preload(page,page_pos).then(() => console.log("Preload done"));
         preload(page,page_pos);
+
+        // For each page, create an option value (dépend de episode, qui change, donc on le recréé à chaque changement d'ep, donc doit rester là):
+        let page_iterable = Object.keys(data[episode][1]);
+        for (let i = 0 ; i < page_iterable.length ; i ++){
+            const option_page = document.createElement("option");
+            option_page.text = `page  ${parseInt(i) +1}`;
+            // console.log(option_page.text);
+            page_select_obj.appendChild(option_page);
+            option_page.value = i+1;
+        };
     };
 
     if (target == "page"){
@@ -260,8 +244,19 @@ function Select_Goto(value, target, ep_title, updateHistory = true) {
     };
 };
 
-async function Goto_adjacent_page(target) {
+async function Goto_adjacent_page(target, ep_title) {
     //Go to becomes async to handle the promises of imageCache.
+    //if we are at the last page, go to the Next episode (if we can)
+    if ((target == "+") && (page == copy_data.length)) {
+        let ep_idx = iterable.indexOf(episode);
+        console.log(`index of episode : ${ep_idx}`);
+        if (ep_idx < iterable.length - 1) {
+            console.log(`next episode : ${iterable[ep_idx+1]}`);
+            Select_Goto(iterable[ep_idx+1], "episode", ep_title);
+            return;
+        }
+    }
+    
     if ((target == "+") && (page < copy_data.length)) {
         page++;
         page_pos = page - 1;
@@ -291,6 +286,17 @@ async function Goto_adjacent_page(target) {
         }
     };
 
+    //if we are at the First page, go to the Previous episode (if we can)
+    if ((target == "-") && (page == 1)) {
+        let ep_idx = iterable.indexOf(episode);
+        console.log(`index of episode : ${ep_idx}`);
+        if (ep_idx > 0) {
+            console.log(`Previous episode : ${iterable[ep_idx-1]}`);
+            Select_Goto(iterable[ep_idx-1], "episode", ep_title);
+            return;
+        }
+    }
+
     if ((target == "-") && (page > 1)) {
         page--;
         page_pos = page - 1;
@@ -318,8 +324,10 @@ async function Goto_adjacent_page(target) {
             img.src = copy_data[page_pos];
         }
     };
+
     // Launch the next preload (async, but we can't launch it earlier because else we abord the current wait)
     preload(page, page_pos);
 }
 
 initialization();
+check_activation("Viewer");
