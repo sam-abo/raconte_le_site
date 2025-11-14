@@ -55,7 +55,7 @@
                     Je suis quelqu'un qui fait de la BD tout seul dans son coin, tout, de l'histoire aux déssins en passant par le site internet est fait
                     par moi seul, à la main (La gauche !) donc si vous appréciez mon travail, vous m'en voyez ravi.
                     <br>
-                    Vous pouvez déjà me suivre sur instagram à l'adresse <a id = "insta-link", href="https://www.instagram.com/r.a.c.o.n.t.e/">@r.a.c.o.n.t.e</a>.
+                    Vous pouvez déjà me suivre sur instagram à l'adresse <a id = "insta-link", href= "">@r.a.c.o.n.t.e</a>.
                     Ou bien encore simplement partager mon travail autour de vous !
                 </p>
 
@@ -75,7 +75,8 @@
         </div>
     </div>
     <!-- <script src="app.js"></script> -->
-    <script type="module" src="JS_modules/navbar.js"></script>
+    <script type="module" src="/raconte_le_site/JS_modules/navbar.js"></script>
+    
     <script>
         //script pour la gestion du lien insta uniquement
         document.addEventListener("DOMContentLoaded", () => {
@@ -92,11 +93,11 @@
             console.log(`is mobile ? : ${is_mobile}`);
             if (is_mobile){ //on est sur tel, on privilégie le lien 
                 insta_link.href = application_link;
+                console.log(`Mobile true, Link : ${insta_link.href}`);
 
                 //il faut donc checker si l'app est installée :
-
                 // Fallback vers la version web si l’app n’est pas installée
-                instaLink.addEventListener("click", (e) => {
+                insta_link.addEventListener("click", (e) => {
                 // On tente d’ouvrir l’app pendant un court délai
                 const now = Date.now(); //timer now
                 setTimeout(() => {
@@ -110,28 +111,12 @@
             }
             else {
                 insta_link.href = website_link;
+                console.log(`Mobile False, Link : ${insta_link.href}`);
+
             }
 
         })
     </script>
-
-    <!-- <style>
-        :root{
-            --max-width : 1400px;
-        }
-        * {
-            box-sizing: border-box;
-            padding: 0;
-            margin: 0;
-            font-family: 'kumbh Sans', sans-serif ;
-        }
-        html, body {
-            margin: 0;
-            height: 100%;
-            background-color: black;
-
-        }
-    </style> -->
 
 </body>
 </html>
