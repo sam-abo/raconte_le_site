@@ -14,7 +14,8 @@ def parser(public_file, extension) :
     # print(path)
     folders = next(os.walk(path))[1]
     folders = sorted(folders, key=lambda x: int(x.split(' ')[1]))
-    # print(folders)
+    print(folders)
+    # return
     # data = []
 
     data_bis = {}
@@ -24,8 +25,12 @@ def parser(public_file, extension) :
         relative_path = os.path.join(path,ep)
         pages_list = WalkOnFiles(relative_path, extension)
         pages_list = ["/raconte_le_site/" + x for x in pages_list]
-        if extension == "png" :
-            pages_list = sorted(pages_list, reverse=True, key=lambda x: int(x[:-4].split('_')[-1]) )
+        # print(pages_list)
+        # return
+        # if extension == "png" :
+        #     pages_list = sorted(pages_list, reverse=True, key=lambda x: int(x[:-4].split('_')[-1]) )
+        print(pages_list)
+        # return
         if extension == "webp" :
             pages_list = sorted(pages_list, reverse=True, key=lambda x: int(x[:-5].split('_')[-1]) )
 
