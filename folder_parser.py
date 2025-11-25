@@ -29,7 +29,7 @@ def parser(public_file, extension) :
         # return
         # if extension == "png" :
         #     pages_list = sorted(pages_list, reverse=True, key=lambda x: int(x[:-4].split('_')[-1]) )
-        print(pages_list)
+        # print(pages_list)
         # return
         if extension == "webp" :
             pages_list = sorted(pages_list, reverse=True, key=lambda x: int(x[:-5].split('_')[-1]) )
