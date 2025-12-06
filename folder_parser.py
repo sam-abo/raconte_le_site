@@ -32,6 +32,7 @@ def parser(public_file, extension) :
         # print(pages_list)
         # return
         if extension == "webp" :
+            pages_list = [x.replace("-","_") for x in pages_list]
             pages_list = sorted(pages_list, reverse=True, key=lambda x: int(x[:-5].split('_')[-1]) )
 
         
