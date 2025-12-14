@@ -194,6 +194,10 @@ async function preload(page, page_pos) {
 
 function Select_Goto(value, target, ep_title) {
     if (target == "episode"){
+        //remove the previous page select
+        page_select_obj.innerHTML = "";
+
+
         page=1;               // on fixe la page au début
         page_pos = page - 1;  // recalcul index
 
@@ -214,7 +218,9 @@ function Select_Goto(value, target, ep_title) {
         preload(page,page_pos);
 
         // For each page, create an option value (dépend de episode, qui change, donc on le recréé à chaque changement d'ep, donc doit rester là):
-        let page_iterable = Object.keys(data[episode][1]);
+        // page_select_obj = document.createElement("select");
+        // page_select_obj.id = "easy_page_select";
+        let page_iterable = data[episode][1];
         for (let i = 0 ; i < page_iterable.length ; i ++){
             const option_page = document.createElement("option");
             option_page.text = `page  ${parseInt(i) +1}`;
@@ -222,6 +228,9 @@ function Select_Goto(value, target, ep_title) {
             page_select_obj.appendChild(option_page);
             option_page.value = i+1;
         };
+
+        page_select_obj.selectedIndex = 0;
+
     };
 
     if (target == "page"){
@@ -326,6 +335,8 @@ async function Goto_adjacent_page(target, ep_title) {
     };
 
     // Launch the next preload (async, but we can't launch it earlier because else we abord the current wait)
+
+    page_select_obj.selectedIndex = page-1; //set select to current page
     preload(page, page_pos);
 }
 
