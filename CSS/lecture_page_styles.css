@@ -95,10 +95,10 @@
 
 @media screen and (max-width:960px) {
 
-    /* #current_page {
-    max-width: 85vw;
-    max-height: 85vh;
-    } */
+    #current_page {
+    max-width: 90vw;
+    max-height: 90vh;
+    }
 
     .page__container h1 {
     font-size: 2vh;
