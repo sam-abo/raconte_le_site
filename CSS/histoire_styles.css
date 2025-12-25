@@ -52,6 +52,8 @@
     color: #fff;
     text-align: start;
     font-size: 2.5vh;
+    justify-content: center;
+    align-content: center;
 }
 
 
@@ -81,10 +83,27 @@
 
 .chap_selec {
     padding-top: 3rem;
+    padding-bottom: 1rem;
+    max-width: 80 vw;
+
+    text-align: center;
+}
+
+.chap_selec p {
+    color: #fff;
+    font-weight: bold;
+
 }
 
 .chap_selec h1 {
     color: white;
+    font-size: 50px;  
+    font-weight: bolder; 
+
+    /* gradient de couleur sur le texte : */
+    background-image: linear-gradient(rgb(255, 255, 255), rgb(9, 255, 0));
+    color: transparent;
+    background-clip: text;
 
 }
 
@@ -112,7 +131,10 @@
     font-size: 2.5vh;
 }
 .link-list li :hover {
-    color: brown;
+    background-image: linear-gradient(rgb(255, 255, 255), rgb(9, 255, 0));
+    color: transparent;
+    background-clip: text;
+    
     transition : all 0.3s ease;
 }
 
@@ -128,6 +150,7 @@
      .story__container { 
         /* stack déjà ses enfants en colonne */
         background-size : contain;
+        padding-bottom: 0;
     }
 
     .story__content {
@@ -150,8 +173,8 @@
     }
 
     .story__content p {
-        /* text-align: center; */
-        text-align: justify;
+        text-align: start;
+
 
         font-size: 1.75vh;
         padding-top: 2vw;
@@ -168,22 +191,35 @@
     max-height:100%;
     }
 
-
     
     /*chap selec*/
     .chap_selec {
     padding-top: 1rem;
+    max-height: 20vh;
     }
+    .chap_selec h1 {
+    font-size: 30px;
+
+    }
+    .chap_selec p {
+        font-size: 1.4vh;
+    }
+
     .link-list {
-    max-height: 250px;
-    width: 80%;
+        /* padding-bottom: 2rem; */
+        padding: 0;
+        margin-top: 4vh;
+        margin-bottom: 2vh;
+
+        /* height: 10vh; */
+        max-height: 15vh;
+        width: 80%;
     }
     .link-list a {
     font-size: 1.5vh;
     }
     .link-list li :hover {
-    color: brown;
-    transition : all 0.3s ease;
+    transition : none;
     }
 
 }
