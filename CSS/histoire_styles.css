@@ -19,13 +19,17 @@
     margin: 0 auto;
     /* margin : 1rem 3rem; */
 
-    height: 90vh;
+    /* TAILLE */
+    /* height: 90vh; */
+    /* height: 100%; */
+    min-height: 100vh;
+    height: auto;
+
     background-color: black;
     z-index: 1;
     width: 100%;
     max-width: var(--max-width);
 
-    height: 100%;
     position: relative;
 
     padding-bottom: 3rem; /*pour éviter que le bas du site s'arrête vraiment à la fin du dernier div, en tout cas pour l'instant*/
@@ -110,6 +114,8 @@
 .link-list {
     max-height: 400px;   /* limite la hauteur */
     overflow-y: auto;    /* active le scroll vertical */
+    overscroll-behavior: contain;
+
     border: 2px solid gray;
     padding: 10px;
     background: #111;
@@ -190,12 +196,12 @@
     max-width:100%;
     max-height:100%;
     }
-
     
     /*chap selec*/
     .chap_selec {
     padding-top: 1rem;
-    max-height: 20vh;
+    max-height: none;
+    
     }
     .chap_selec h1 {
     font-size: 30px;
@@ -203,16 +209,21 @@
     }
     .chap_selec p {
         font-size: 1.4vh;
+        max-width: 90vw;
+        max-height: 30vh;
     }
 
     .link-list {
         /* padding-bottom: 2rem; */
         padding: 0;
-        /* margin-top: 4vh; */
+        margin-top: 2vh;
         margin-bottom: 2vh;
 
         /* height: 10vh; */
-        max-height: 15vh;
+        max-height: 20vh;   /* OK de limiter, mais pas trop */
+        overflow-y: auto;
+        overscroll-behavior: contain;
+
         width: 80%;
     }
     .link-list a {
