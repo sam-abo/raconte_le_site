@@ -87,8 +87,10 @@ le texte dans les items quoi*/
 }
 
 .navbar__links:hover {
-    color: brown;
-    transition : all 0.5s ease;
+    background-image: linear-gradient(rgb(255, 255, 255), rgb(9, 255, 0));
+    color: transparent;
+    background-clip: text;
+    transition : all 0.3s ease;
 
 }
 
