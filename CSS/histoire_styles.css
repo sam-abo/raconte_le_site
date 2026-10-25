@@ -1,27 +1,23 @@
 /* STORY AND CHAPTER SELECTION STYLES */
 
+/* Règle d'or pour le zoom : on dimensionne en rem / px (pas en vh / vw).
+   vh et vw sont relatifs à la fenêtre : quand on zoome, la fenêtre "rétrécit"
+   en pixels CSS, donc tout ce qui est en vh/vw rétrécit aussi et annule le zoom. */
+
 /*story*/
 .story {
     background-color: black;
-    height: 100%;
+    min-height: 100%;
 }
 
 .story__container {
     display: flex;
-    flex-direction: column; /* empile les enfants en colonne */
-
-    align-items: center; /* ou center si on veut centrer horizontalement */
-    justify-content: flex-start; /* gère l’alignement vertical */
-
-    /* align-items: top;
-    justify-self: top; */
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2rem;                      /* espace entre résumé, consignes et liste */
 
     margin: 0 auto;
-    /* margin : 1rem 3rem; */
-
-    /* TAILLE */
-    /* height: 90vh; */
-    /* height: 100%; */
     min-height: 100vh;
     height: auto;
 
@@ -31,98 +27,156 @@
     max-width: var(--max-width);
 
     position: relative;
-
-    padding-bottom: 3rem; /*pour éviter que le bas du site s'arrête vraiment à la fin du dernier div, en tout cas pour l'instant*/
-
-
-
+    padding: 2rem 2rem 3rem;
 }
 
 .story__content {
     display: grid;
-    grid-template-columns: 1fr 1.3fr;
-    /* grid-template-columns: minmax(0, 1fr); see note below
-    grid-template-areas: "sidebar content"; */
+    grid-template-columns: minmax(14rem, 22rem) minmax(0, 1fr);
+    align-items: center;
+    gap: 3rem;
 
-    align-self: center;
-    justify-content: center;
-    /* justify-self: center; */
-    height: 500px;
-    /* padding-bottom: 1 rem ; */
-
+    width: 100%;
+    max-width: 62rem;
+    height: auto;                   /* plus de hauteur fixe : c'est elle qui causait le chevauchement */
 }
 
 .story__content p {
-    /* grid-area: content; */
     color: #fff;
     text-align: start;
-    font-size: 2.5vh;
-    justify-content: center;
-    align-content: center;
+    font-size: 1.2rem;
+    line-height: 1.65;
 }
-
 
 .img_container {
-    /* grid-area: sidebar ; */
-    max-height: 500px;
     display: flex;
     justify-content: center;
-    align-items: start;
-
-    
-    /* padding-right: 1.5vw; */
+    align-items: flex-start;
 }
 
-.img_container a {
-    height: 100%;
+/* la cover est maintenant un bouton qui ouvre la version agrandie */
+.cover-btn {
+    display: block;
+    padding: 0;
+    border: 0;
+    background: none;
+    line-height: 0;
+    cursor: zoom-in;
+    max-width: 100%;
+}
+
+.cover-btn:focus-visible {
+    outline: 3px solid rgb(9, 255, 0);
+    outline-offset: 4px;
 }
 
 #cover_mcguffin {
-    max-width:100%;
-    max-height:100%;
-    overflow: visible;
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 32rem;
     border: 2px solid #fff;
+    transition: transform 0.2s ease;
+}
+
+.cover-btn:hover #cover_mcguffin {
+    transform: scale(1.02);
+}
+
+/* Cover agrandie */
+.cover-dialog {
+    margin: auto;                   /* indispensable : le "* { margin:0 }" global casserait le centrage */
+    padding: 0;
+    border: 0;
+    background: transparent;
+    max-width: 96vw;
+    max-height: 96vh;
+    overflow: visible;
+}
+
+.cover-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.88);
+}
+
+.cover-dialog__img {
+    display: block;
+    max-width: 96vw;
+    max-height: 92vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    cursor: zoom-out;
+}
+
+.cover-dialog__close {
+    position: fixed;
+    top: 1rem;
+    right: 1.25rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.cover-dialog__close:hover,
+.cover-dialog__close:focus-visible {
+    border-color: rgb(9, 255, 0);
+    color: rgb(9, 255, 0);
 }
 
 /*chap selec*/
 
 .chap_selec {
-    padding-top: 3rem;
-    padding-bottom: 1rem;
-    max-width: 80 vw;
+    padding-top: 1rem;
+    padding-bottom: 0;
+    width: 100%;
+    max-width: 62rem;
+    text-align:justify;
 
-    text-align: center;
 }
 
 .chap_selec p {
     color: #fff;
     font-weight: bold;
-    max-width: 35vw;
+    max-width: 42rem;
+    margin: 1rem auto 0;
+    font-size: 90%;
+    line-height: 1.7;
 
 }
 
 .chap_selec h1 {
     color: white;
-    font-size: 50px;  
-    font-weight: bolder; 
+    font-size: 3rem;
+    font-weight: bolder;
+    line-height: 1.2;
 
     /* gradient de couleur sur le texte : */
     background-image: linear-gradient(rgb(255, 255, 255), rgb(9, 255, 0));
     color: transparent;
     background-clip: text;
+    -webkit-background-clip: text;
+    text-align: center;
 
 }
 
 .link-list {
-    max-height: 400px;   /* limite la hauteur */
-    overflow-y: auto;    /* active le scroll vertical */
+    max-height: 25rem;
+    overflow-y: auto;
     overscroll-behavior: contain;
 
     border: 2px solid gray;
     padding: 10px;
     background: #111;
     color: white;
-    width: 80%;
+    width: 100%;
+    max-width: 42rem;
 }
 .link-list ul {
     margin: 0;
@@ -136,13 +190,14 @@
     color: white;
     text-decoration: none;
     font-weight: bold;
-    font-size: 2.5vh;
+    font-size: 1.15rem;
 }
 .link-list li :hover {
     background-image: linear-gradient(rgb(255, 255, 255), rgb(9, 255, 0));
     color: transparent;
     background-clip: text;
-    
+    -webkit-background-clip: text;
+
     transition : all 0.3s ease;
 }
 
@@ -153,86 +208,66 @@
 #sentinel { min-height: 10px; background: rgba(255,0,0,0.15); outline: 1px solid red; }
 
 @media screen and (max-width:960px) {
-    
+
     /* Story */
-     .story__container { 
-        /* stack déjà ses enfants en colonne */
-        background-size : contain;
-        padding-bottom: 0;
+    .story__container {
+        gap: 1.25rem;
+        padding: 1rem 1rem 2rem;
     }
 
     .story__content {
-        padding-top: 1.5rem;
-        
-        height: auto;
-        
         display: flex;
-        flex-direction: column; /* empile les enfants en colonne */
-
-        align-items: center; /* ou center si on veut centrer horizontalement */
-        justify-content: flex-start; /* gère l’alignement vertical */
-
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1.25rem;
+        padding-top: 0.5rem;
+        height: auto;
     }
 
     .img_container {
-        /* padding-right: 2.5vw;
-        padding-left: 3.5vw; */
-        height: 30vh;
+        height: auto;
+    }
+
+    #cover_mcguffin {
+        max-width: 100%;
+        max-height: 20rem;
     }
 
     .story__content p {
         text-align: start;
-
-
-        font-size: 1.75vh;
-        padding-top: 2vw;
-        
-        /* margin: 2vw 2vw; */ /*dans le cas où c center*/
-        padding-left: 8vw;
-        padding-right: 8vw;
-
-
+        font-size: 1rem;
+        line-height: 1.6;
+        padding: 0 0.5rem;
     }
 
-    #cover_mcguffin {
-    max-width:100%;
-    max-height:100%;
-    }
-    
     /*chap selec*/
     .chap_selec {
-    padding-top: 1rem;
-    max-height: none;
-    
+        padding-top: 0.5rem;
+        max-height: none;
     }
     .chap_selec h1 {
-    font-size: 30px;
-
+        font-size: 1.9rem;
     }
     .chap_selec p {
-        font-size: 1.4vh;
-        max-width: 90vw;
-        max-height: 30vh;
+        font-size: 0.95rem;
+        max-width: 100%;
+        max-height: none;
     }
 
     .link-list {
-        /* padding-bottom: 2rem; */
-        padding: 0;
-        margin-top: 2vh;
-        margin-bottom: 2vh;
-
-        /* height: 10vh; */
-        max-height: 20vh;   /* OK de limiter, mais pas trop */
+        padding: 0.5rem;
+        margin-top: 0;
+        margin-bottom: 0;
+        max-height: 16rem;
         overflow-y: auto;
         overscroll-behavior: contain;
-
-        width: 80%;
+        width: 100%;
     }
     .link-list a {
-    font-size: 1.5vh;
+        font-size: 1rem;
     }
     .link-list li :hover {
-    transition : none;
+        transition : none;
     }
-
 }

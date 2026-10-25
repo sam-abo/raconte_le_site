@@ -16,7 +16,9 @@
     height: 90vh;
     background-color: black;
     z-index: 1;
-    width: 100%;
+    /* width: 100%; */
+    width: 70vw ;
+
     max-width: var(--max-width);
 
     height: 100%;
@@ -38,7 +40,7 @@
     
     /* display: inline-block; */
 
-    font-size: 7vh;
+    font-size: 700%;
 }
 
 .main__content p {
@@ -48,7 +50,7 @@
     text-align: start;
     /* margin-left:  5vw ;
     margin-right: 5vw; */
-    font-size: 3vh;
+    font-size: 200%;
 
 
 }
@@ -68,14 +70,14 @@
         text-align: center;
         /* display: inline-block; */
 
-        font-size: 4vh;
+        font-size: 250%;
     }
 
     .main__content p {
         /* display : inline-block; */
         align-items: center;
         text-align:justify;
-        font-size: 1.5vh;
+        font-size: 100%;
         margin: auto;
     }
 }

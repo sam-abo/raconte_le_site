@@ -5,7 +5,10 @@
     /* justify-content: center; */
     flex-direction: column;
     /* position: relative; */
-    margin : 0 15vw;
+    width: 100%;
+    max-width: 75rem;   /* largeur fixe en rem : le zoom agrandit vraiment */
+    margin : 0 auto;
+    padding: 0 1rem;
     z-index: 1
 }
 
@@ -41,8 +44,10 @@
 }
 
 #current_page {
-    max-width: 85vw;
-    max-height: 85vh;
+    max-width: 100%;
+    max-height: 56rem;  /* plafond en rem (et plus en vh) pour que ctrl + agrandisse la page */
+    width: auto;
+    height: auto;
     border : solid 1px white;
     /* object-fit: contain;
     transition: opacity 0.15s ease-out, transform 0.1s ease-out;
@@ -95,13 +100,17 @@
 
 @media screen and (max-width:960px) {
 
+    .page__container {
+        padding: 0 0.5rem;
+    }
+
     #current_page {
-    max-width: 90vw;
-    max-height: 90vh;
+        max-width: 100%;
+        max-height: none;
     }
 
     .page__container h1 {
-    font-size: 2vh;
+        font-size: 1.25rem;
     }
     
 }
